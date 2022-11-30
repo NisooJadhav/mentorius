@@ -3,8 +3,6 @@ import React from "react";
 import Doubt from "./Doubt";
 import Masonry from "react-masonry-css";
 
-import { doubtDetailMoreDoubtQuery, doubtDetailQuery } from "../utils/data";
-
 const breakpointColumnsObj = {
   default: 4,
   3000: 6,
@@ -21,9 +19,8 @@ const MasonryLayout = ({ doubts }) => {
       breakpointCols={breakpointColumnsObj}
     >
       {doubts?.map((doubt) => (
-        <Doubt key={doubt} doubt={doubt} className="w-max" />
+        <Doubt key={doubt._id} doubt={doubt} className="w-max" />
       ))}
-      
     </Masonry>
   );
 };

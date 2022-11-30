@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { client, urlFor } from "../client";
 
+import { doubtDetailMoreDoubtQuery, doubtDetailQuery } from "../utils/data";
+
 import { MdDownloadForOffline } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
@@ -57,7 +59,7 @@ const Doubt = ({ doubt }) => {
         });
     }
   };
-
+  
   return (
     <div className="m-2">
       <div

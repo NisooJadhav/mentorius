@@ -72,18 +72,18 @@ export default function DoubtDetail({ user }) {
       <div className="flex justify-center items-center md:items-start flex-initial">
         <img
           src={doubtDetail?.image && urlFor(doubtDetail.image).url()}
-          className="rounded-3xl w-3/4 shadow-lg"
+          className="rounded-md w-3/4 shadow-sm md:rounded-1xl"
           alt="user post"
           loading="lazy"
         />
       </div>
       <div className="w-full p-5 flex-1 xl:min-w-620">
         <div className="flex items-center justify-between">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center text-2xl">
             <a
               href={`${doubtDetail.image?.asset?.url}?dl=`}
               download
-              className="bg-white w-15 h-15 rounded-full"
+              className="bg-white rounded-full"
             >
               <MdDownloadForOffline />
             </a>
@@ -101,24 +101,29 @@ export default function DoubtDetail({ user }) {
           <h1 className="text-2xl font-bold break-words mt-3">
             {doubtDetail.title}
           </h1>
-          <div className="h-[1px] mt-1 bg-zinc-500/25"></div>
           <p className="text-gray-500 mt-5 mb-2">{doubtDetail.about}</p>
         </div>
         <Link
           to={`/user-profile/${doubtDetail.postedBy?._id}`}
-          className="flex gap-2 mt-3 items-center rounded-full bg-white "
+          className="flex gap-2 mt-3 items-center bg-white"
         >
           <img
-            className="w-8 h-8 rounded-full object-cover"
+            className="w-8 h-8 rounded-full object-cover mb-1"
             src={doubtDetail.postedBy?.image}
             alt="user-profile"
             loading="lazy"
           />
-          <p className="font-semibold capitalize">
+          <p className="font-semibold capitalize mb-1">
             {doubtDetail.postedBy?.userName}
           </p>
         </Link>
-        <h2 className="mt-5 text-2xl">Comments</h2>
+
+        <div className="h-[1px] mt-1 bg-zinc-500/25"></div>
+        <p className="text-gray-600 mt-2 text-sm">category: </p>
+        <p className="text-gray-400 text-sm">#{doubtDetail.category}</p>
+        <div className="h-[1px] mt-1 bg-zinc-500/25"></div>
+
+        <h2 className="mt-5 text-2xl">Comments:</h2>
         <div className="max-h-370 overflow-y-auto">
           {doubtDetail?.comments?.map((comment, i) => (
             <div
