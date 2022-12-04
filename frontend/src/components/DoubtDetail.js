@@ -6,6 +6,7 @@ import { client, urlFor } from "../client";
 import { doubtDetailMoreDoubtQuery, doubtDetailQuery } from "../utils/data";
 import MasonryLayout from "./MasonryLayout";
 import { MdDownloadForOffline } from "react-icons/md";
+import { HiArrowUp } from "react-icons/hi";
 import Spinner from "./Spinner";
 
 export default function DoubtDetail({ user }) {
@@ -66,13 +67,13 @@ export default function DoubtDetail({ user }) {
 
   return (
     <div
-      className="flex xl-flex-row flex-col m-auto bg-white"
+      className="flex xl-flex-row flex-col m-auto bg-white dark:bg-gray-800"
       style={{ maxWidth: "1500px", borderRadius: "32px" }}
     >
       <div className="flex justify-center items-center md:items-start flex-initial">
         <img
           src={doubtDetail?.image && urlFor(doubtDetail.image).url()}
-          className="rounded-md w-3/4 shadow-sm md:rounded-1xl"
+          className="rounded-md w-3/4 shadow-sm md:rounded-1xl hover:bgOverlay cursor-pointer brightness-[90%] hover:brightness-100 transition-all duration-300"
           alt="user post"
           loading="lazy"
         />
@@ -83,7 +84,9 @@ export default function DoubtDetail({ user }) {
             <a
               href={`${doubtDetail.image?.asset?.url}?dl=`}
               download
-              className="bg-white rounded-full"
+              className="bg-white rounded-full hover:bg-sky-500 hover:text-white duration-300 transition-all"
+              alt="download image"
+              aria-label="download image"
             >
               <MdDownloadForOffline />
             </a>
@@ -92,20 +95,23 @@ export default function DoubtDetail({ user }) {
             href={doubtDetail.destination}
             target="_blank"
             rel="noreferrer"
-            className="text-sky-600 hover:text-sky-800"
+            className="flex items-center text-sky-600 hover:text-sky-800 md:text-lg text-md"
           >
             {doubtDetail.destination}
+            <HiArrowUp className="ml-1 rotate-90 hover:rotate-45 text-lg transition-all duration-300" />
           </a>
         </div>
         <div>
-          <h1 className="text-2xl font-bold break-words mt-3">
+          <h1 className="text-2xl font-bold break-words mt-3 dark:text-gray-50 dark:font-normal">
             {doubtDetail.title}
           </h1>
-          <p className="text-gray-500 mt-5 mb-2">{doubtDetail.about}</p>
+          <p className="text-gray-500 text-lg mt-5 mb-2 dark:text-gray-50/80">
+            {doubtDetail.about}
+          </p>
         </div>
         <Link
           to={`/user-profile/${doubtDetail.postedBy?._id}`}
-          className="flex gap-2 mt-3 items-center bg-white"
+          className="flex gap-2 mt-3 items-center bg-white dark:bg-gray-800"
         >
           <img
             className="w-8 h-8 rounded-full object-cover mb-1"
@@ -113,21 +119,26 @@ export default function DoubtDetail({ user }) {
             alt="user-profile"
             loading="lazy"
           />
-          <p className="font-semibold capitalize mb-1">
+          <p className="font-semibold capitalize mb-1 dark:bg-gray-800 dark:text-white dark:font-normal">
             {doubtDetail.postedBy?.userName}
           </p>
         </Link>
 
         <div className="h-[1px] mt-1 bg-zinc-500/25"></div>
-        <p className="text-gray-600 mt-2 text-sm">category: </p>
-        <p className="text-gray-400 text-sm">#{doubtDetail.category}</p>
+        <p className="text-gray-500 mt-2 text-md">category: </p>
+        <a
+          href={`/category/${doubtDetail.category}`}
+          className="text-gray-400 text-md hover:text-sky-500"
+        >
+          #{doubtDetail.category}
+        </a>
         <div className="h-[1px] mt-1 bg-zinc-500/25"></div>
 
-        <h2 className="mt-5 text-2xl">Comments:</h2>
+        <h2 className="mt-5 text-2xl dark:text-gray-50/80">Comments:</h2>
         <div className="max-h-370 overflow-y-auto">
           {doubtDetail?.comments?.map((comment, i) => (
             <div
-              className="flex gap-2 mt-5 items-center bg-white rounded-lg"
+              className="flex gap-2 mt-5 items-center bg-white rounded-lg dark:bg-gray-800"
               key={i}
             >
               <img
@@ -137,8 +148,10 @@ export default function DoubtDetail({ user }) {
                 loading="lazy"
               />
               <div className="flex flex-col">
-                <p className="font-bold">{comment.postedBy.userName}</p>
-                <p>{comment.comment}</p>
+                <p className="font-bold dark:bg-gray-800 dark:text-gray-50/90 dark:font-normal">
+                  {comment.postedBy.userName}
+                </p>
+                <p className="dark:font-normal dark:text-gray-50/80">{comment.comment}</p>
               </div>
             </div>
           ))}
@@ -158,11 +171,11 @@ export default function DoubtDetail({ user }) {
             placeholder="add a comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
+            className="flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300 dark:bg-gray-800 dark:text-gray-50 dark:border-gray-100/50"
           />
           <button
             type="button"
-            className="bg-sky-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
+            className="bg-sky-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none hover:bg-sky-600"
             onClick={addComment}
           >
             {addingComment ? "posting the comment..." : "Post"}
@@ -171,7 +184,7 @@ export default function DoubtDetail({ user }) {
       </div>
       {doubts?.length > 0 ? (
         <>
-          <h2 className="text-center font-bold text-2x mt-8 mb-4">
+          <h2 className="text-center font-bold text-2x mt-8 mb-4 dark:text-gray-50/80">
             more like this
           </h2>
           <MasonryLayout doubts={doubts} />

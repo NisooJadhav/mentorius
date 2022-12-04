@@ -2,7 +2,11 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  media: false, // or 'media' or 'class'
+
+  //for dark mode
+  darkMode: "class",
+
+  // media: false,
   theme: {
     extend: {
       margin: {
@@ -88,27 +92,7 @@ module.exports = {
       pointer: "pointer",
     },
   },
-  // mode: "jit",
-  // theme: {
-  //   extend: {
-  //     animation: {
-  //       marquee: "marquee 25s linear infinite",
-  //       marquee2: "marquee2 25s linear infinite",
-  //     },
-  //     keyframes: {
-  //       marquee: {
-  //         "0%": { transform: "translateX(0%)" },
-  //         "100%": { transform: "translateX(-100%)" },
-  //       },
-  //       marquee2: {
-  //         "0%": { transform: "translateX(100%)" },
-  //         "100%": { transform: "translateX(0%)" },
-  //       },
-  //     },
-  //   },
-  // },
   variants: {
-    // backgroundColor: ['active'],
     extend: {},
   },
   plugins: [],

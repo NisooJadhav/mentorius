@@ -20,9 +20,9 @@ function getRandomRng() {
 let randomImage = `https://picsum.photos/seed/${getRandomRng()}/1920/1080`;
 
 const activeBtnStyles =
-  "bg-sky-600 text-white font-bold p-2 rounded-full w-20 outline-none";
+  "bg-sky-600 text-white font-bold p-1 pl-1 pr-1 rounded-full w-20 outline-none";
 const nonActiveBtnStyles =
-  "bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none";
+  "mr-4 opacity-50 hover:opacity-100 font-bold p-2 rounded-full w-20 outline-none dark:text-gray-50/80 dark:font-normal";
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -51,9 +51,14 @@ export default function UserProfile() {
       client.fetch(createdDoubtsQuery).then((data) => {
         setDoubts(data);
       });
-    } else {
+    } else if (text === "Saved") {
       const savedDoubtsQuery = userSavedDoubtsQuery(userId);
       client.fetch(savedDoubtsQuery).then((data) => {
+        setDoubts(data);
+      });
+    } else {
+      const createdDoubtsQuery = userCreatedDoubtsQuery(userId);
+      client.fetch(createdDoubtsQuery).then((data) => {
         setDoubts(data);
       });
     }
@@ -75,10 +80,10 @@ export default function UserProfile() {
       <div className="flex flex-col pb-5">
         <div className="relative flex flex-col mb-7">
           <div className="flex flex-col justify-center items-center">
-            <div className="w-full h-370 2xl:h-510 bg-gradient-to-b from-sky-900 to-teal-900">
+            <div className="w-full h-370 2xl:h-420 bg-gradient-to-b from-sky-800 to-black">
               <img
                 src={randomImage}
-                className="w-full h-370 2xl:h-510 object-cover opacity-50"
+                className="w-full h-370 2xl:h-420 object-cover opacity-30"
                 alt="profile banner"
                 loading="lazy"
               />
@@ -91,20 +96,19 @@ export default function UserProfile() {
                 loading="lazy"
               />
             </div>
-            <h1 className="font-bold text-3xl text-center mt-3 mb-5">
+            <h1 className="font-bold text-3xl text-center mt-3 mb-5 dark:text-gray-50 dark:font-normal">
               {user.userName}
             </h1>
             <div className="absolute top-0 z-1 right-0">
               {userId === User.sub && (
                 <button
                   type="button"
-                  className="flex flex-row bg-gray-100/90 hover:bg-gray-50 p-2 rounded-lg cursor-pointer outline-none shadow-md m-2"
+                  className="flex flex-row bg-gray-100/90 hover:bg-gray-50 p-2 rounded-lg cursor-pointer outline-none shadow-md m-2 dark:bg-gray-800 dark:text-white"
                   onClick={logout}
                 >
                   <AiOutlineLogout
-                    color="blue"
                     fontSize={21}
-                    className="mr-1"
+                    className="mr-1 dark:text-white"
                   />{" "}
                   log out
                 </button>

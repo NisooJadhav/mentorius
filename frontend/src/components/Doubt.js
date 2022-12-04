@@ -14,9 +14,11 @@ const Doubt = ({ doubt }) => {
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const { postedBy, image, _id, destination } = doubt;
+
+  //console.log(doubt);
 
   const user =
     localStorage.getItem("user") !== "undefined"
@@ -59,7 +61,7 @@ const Doubt = ({ doubt }) => {
         });
     }
   };
-  
+
   return (
     <div className="m-2">
       <div
@@ -71,7 +73,7 @@ const Doubt = ({ doubt }) => {
         {image && (
           <img
             className="rounded-lg w-full "
-            src={urlFor(image).width(250).url()}
+            src={urlFor(image).width(720).url()}
             alt="user-post"
             loading="lazy"
           />
@@ -87,11 +89,11 @@ const Doubt = ({ doubt }) => {
                   href={`${image?.asset?.url}?dl=`}
                   download
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.stopPropagation();  
                   }}
-                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+                  className="bg-white w-7 h-7 rounded-full flex items-center justify-center text-dark text-sm opacity-75 hover:opacity-100 hover:shadow-sm hover:bg-sky-600 hover:text-white outline-none transition-all duration-300"
                 >
-                  <MdDownloadForOffline />
+                  <MdDownloadForOffline className="w-7 h-7 text-sm"/>
                 </a>
               </div>
               {alreadySaved?.length !== 0 ? (
@@ -119,13 +121,12 @@ const Doubt = ({ doubt }) => {
                 <a
                   href={destination}
                   target="_blank"
-                  className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
+                  className="bg-white flex items-center gap-2 text-black font-bold p-1 pl-2 pr-3 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                   rel="noreferrer"
                 >
-                  {" "}
-                  <BsFillArrowUpRightCircleFill />
-                  {destination.length > 15
-                    ? `${destination.slice(0, 15)}...`
+                  <BsFillArrowUpRightCircleFill className="border-none outline-none text-lg"/>
+                  {destination.length > 25
+                    ? `${destination.slice(0, 25)}...`
                     : destination}
                 </a>
               ) : undefined}
@@ -155,7 +156,7 @@ const Doubt = ({ doubt }) => {
           alt="user-profile"
           loading="lazy"
         />
-        <p className="font-semibold capitalize">{postedBy?.userName}</p>
+        <p className="font-semibold capitalize dark:text-gray-50 dark:font-normal">{postedBy?.userName}</p>
       </Link>
     </div>
   );

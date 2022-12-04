@@ -8,16 +8,16 @@ export default function Navbar({ searchTerm, setSearchTerm, user }) {
   if (!user) return null;
 
   return (
-    <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
-      <div className="flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none shadow-sm focus-within:shadow-md">
-        <IoMdSearch fontSize={21} className="ml-1" />
+    <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7 dark:bg-black/90">
+      <div className="flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none shadow-sm focus-within:shadow-md dark:bg-gray-800 dark:shadow-md dark:focus-within:shadow-lg dark:shadow-black">
+        <IoMdSearch fontSize={21} className="ml-1 dark:text-gray-50" />
         <input
           type="text"
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="search"
           value={searchTerm}
           onFocus={() => navigate("/search")}
-          className="p-2 w-full bg-white outline-none"
+          className="p-2 w-full bg-white outline-none dark:bg-gray-800 dark:text-gray-50/80"
         />
 
         <div className="flex gap-3">

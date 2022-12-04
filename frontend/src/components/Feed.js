@@ -33,7 +33,7 @@ export default function Feed() {
   if (!doubts?.length)
     return (
       <div className="flex flex-col align-center items-center">
-        <h2 className="text-sky-600 text-xl">no pins available!</h2>
+        <h2 className="text-sky-600 text-xl">no doubts available!</h2>
       </div>
     );
 

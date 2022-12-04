@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { HiMenu } from "react-icons/hi";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { Link, Route, Routes } from "react-router-dom";
 
 import { Sidebar, UserProfile } from "../components";
+import ChatRoom from "../components/ChatRoom";
+import About from "../components/About";
+
 import Doubts from "./Doubts";
 import { client } from "../client";
-import About from "../components/About";
 import logo from "../assets/logo.png";
 
 import { userQuery } from "../utils/data";
 import { fetchUser } from "../utils/fetchUser";
+
+import { HiMenu } from "react-icons/hi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import Articles from "../components/Articles";
 
 export default function Home() {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -30,13 +34,19 @@ export default function Home() {
     scrollRef.current.scrollTo(0, 0);
   }, []);
 
+  const [darkTheme, setDarkTheme] = useState(false);
+  
   return (
-    <div className="flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
+    <div className="flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out dark:bg-black/90">
       <div className="hidden md:flex h-screen flex-initial">
-        <Sidebar user={user && user} />
+        <Sidebar
+          user={user && user}
+          darkTheme={darkTheme}
+          setDarkTheme={setDarkTheme}
+        />
       </div>
       <div className="flex md:hidden flex-row">
-        <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
+        <div className="p-2 w-full flex flex-row justify-between items-center shadow-md dark:text-gray-50/50 dark:hover:text-gray-50">
           <HiMenu
             fontSize={40}
             className="cursor-pointer"
@@ -56,7 +66,7 @@ export default function Home() {
         </div>
         {toggleSidebar && (
           <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
-            <div className="absolute w-full flex justify-end items-center p-2">
+            <div className="absolute w-full flex justify-end items-center p-2 dark:text-white">
               <AiFillCloseCircle
                 fontSize={30}
                 className="cursor-pointer"
@@ -73,6 +83,8 @@ export default function Home() {
           <Route path="/user-profile/:userId" element={<UserProfile />} />
           <Route path="/*" element={<Doubts user={user && user} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/chat" element={<ChatRoom />} />
+          <Route path="/articles" element={<Articles />} />
         </Routes>
       </div>
     </div>

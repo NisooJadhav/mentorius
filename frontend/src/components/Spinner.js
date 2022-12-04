@@ -12,7 +12,7 @@ export default function Spinner({ message }) {
         width={200}
         className="m-5 bg-sky-600"
       />
-      <p className="text-lg text-center px-2">{message}</p>
+      <p className="text-lg text-center mt-2 px-2 dark:text-gray-50/80">{message}</p>
     </div>
   );
 }
